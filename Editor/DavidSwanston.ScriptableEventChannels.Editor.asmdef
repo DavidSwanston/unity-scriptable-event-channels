@@ -1,0 +1,16 @@
+{
+    "name": "DavidSwanston.ScriptableEventChannels.Editor",
+    "rootNamespace": "DavidSwanston.ScriptableEventChannels",
+    "references": [
+        "GUID:1c31b0ae46b699a498d76b890177efa1"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
