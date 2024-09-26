@@ -1,24 +1,89 @@
-This is free and unencumbered software released into the public domain.
 
-Anyone is free to copy, modify, publish, use, compile, sell, or
-distribute this software, either in source code form or as a compiled
-binary, for any purpose, commercial or non-commercial, and by any
-means.
+# ScriptableObject Event Channels
+A scriptable object based event channel system for Unity.
 
-In jurisdictions that recognize copyright laws, the author or authors
-of this software dedicate any and all copyright interest in the
-software to the public domain. We make this dedication for the benefit
-of the public at large and to the detriment of our heirs and
-successors. We intend this dedication to be an overt act of
-relinquishment in perpetuity of all present and future rights to this
-software under copyright law.
+This is heavily based on the examples in Unity's [Create modular game architecture in Unity with ScriptableObjects](https://unity.com/resources/create-modular-game-architecture-with-scriptable-objects-ebook?ungated=true&isGated=false) e-book.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR
-OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
-ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-OTHER DEALINGS IN THE SOFTWARE.
+I wanted to turn this into a package for easy use in new projects.
 
-For more information, please refer to <https://unlicense.org>
+## Installation
+Import using the unity package manager with this URL:
+https://github.com/DavidSwanston/unity-scriptable-event-channels.git
+
+## Usage
+  Create a new event channel object (Right Click > Create > Events > xxx Event Channel)
+
+  Create a broadcaster and a listener script:
+
+#### Void Event Broadcaster Example
+```csharp
+    [SerializeField] private VoidEventChannelSO eventChannel;
+
+    private void DoSomething()
+    {
+        // Do something here, then broadcast an event
+
+        eventChannel?.RaiseEvent();
+    }
+```
+
+#### Void Event Listener Example
+```csharp
+    [SerializeField] private VoidEventChannelSO eventChannel;
+
+    private void OnEnable()
+    {
+        if (eventChannel != null)
+            eventChannel.OnEventRaised += OnEventRaised;
+    }
+
+    private void OnDisable()
+    {
+        if (eventChannel != null)
+            eventChannel.OnEventRaised -= OnEventRaised;
+    }
+
+    private void OnEventRaised()
+    {
+        // respond to the raised event
+    }
+```
+Drag the VoidEventChannel object into both scripts in the inspector, and that's it!
+
+![void-listeners](https://github.com/user-attachments/assets/d1ab2087-6466-4cc3-961f-1ac4546b7a83)
+
+At runtime, a list of active listeners will be shown on the scriptable object. Clicking on a listener name will ping it in the hierarchy.
+
+A test event can be sent to all listers with the Raise Test Event button.
+
+## Extending
+
+Events currently support the following types:
+- Bool
+- Float
+- GameObject
+- Int
+- String
+- Transform
+- Vector2
+- Vector3
+- Void
+
+To add another event type you need to create an empty script for it which inherits from GenericEventChannelSO and an empty custom inspector script for it which inherits from GenericEventChannelSOEditor.
+
+Example:
+```csharp
+    [CreateAssetMenu(fileName = "FooEventChannel", menuName = "Events/Foo Event Channel")]
+    public class FooEventChannelSO : GenericEventChannelSO<Foo>
+    {   
+    }
+```
+
+```csharp
+    [CustomEditor(typeof(FooEventChannelSO))]
+    public class FoolEventChannelSOEditor : GenericEventChannelSOEditor<Foo>
+    {
+    }
+```
+
+To create an  event with multiple parameters, you'd need to create another version of the GenericEventChannelSO script.

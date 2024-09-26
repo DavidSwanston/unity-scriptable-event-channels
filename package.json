@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "displayName": "Scriptable Event Channels",
   "description": "Use scriptable objets as event channels to decouple your code. \n\nBased on Unity's 'Create modular game architecture in Unity with ScriptableObjects' \n\nebook: https://unity.com/resources/create-modular-game-architecture-with-scriptable-objects-ebook?ungated=true&isGated=false and \ndemo project: https://github.com/UnityTechnologies/PaddleGameSO/tree/main.",
-  "documentationUrl": "https://github.com/davidswanston/scriptable-event-channels/README.md",
-  "changelogUrl": "https://github.com/davidswanston/scriptable-event-channels/CHANGELOG.md",
-  "licensesUrl": "https://github.com/davidswanston/scriptable-event-channels/LICENSE.md",
+  "documentationUrl": "https://github.com/DavidSwanston/unity-scriptable-event-channels/blob/main/README.md",
+  "changelogUrl": "https://github.com/DavidSwanston/unity-scriptable-event-channels/blob/main/CHANGELOG.md",
+  "licensesUrl": "https://github.com/DavidSwanston/unity-scriptable-event-channels/blob/main/LICENSE.md",
   "keywords": [
     "Events",
     "Scriptable Object",

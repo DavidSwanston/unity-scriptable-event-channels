@@ -105,11 +105,11 @@ namespace DavidSwanston.ScriptableEventChannels.Editor
         {
             List<MonoBehaviour> listeners = new List<MonoBehaviour>();
 
-            if (_eventChannel == null || _eventChannel.OnEventRaised == null)
+            if (_eventChannel == null || _eventChannel.GetEventListeners() == null)
                 return listeners;
 
             // Get all delegates subscribed to the OnEventRaised action
-            var delegateSubscribers = _eventChannel.OnEventRaised.GetInvocationList();
+            var delegateSubscribers = _eventChannel.GetEventListeners();
 
             foreach (var subscriber in delegateSubscribers)
             {
